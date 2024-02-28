@@ -14,7 +14,7 @@ const gridMaxWidth = parseFloat(window.getComputedStyle(grid).width);
 let gridSize = 16;
 let gridItemColor = '#ff0000';
 let gridEnable = true;
-let drawingMode = 0; // 0: color mode, 1: rainbow mode
+let drawingMode = 0; // 0: color mode, 1: rainbow mode, : gray mode
 
 window.addEventListener('load', AttachGridOnLoad);
 
@@ -166,12 +166,12 @@ function resetGrid() {
   grid.style.display = 'flex';
 }
 
-function getRandomColor() {
+function getRandomColor(graymode = false) {
   const red = random(0, 255).toString(16);
   const blue = random(0, 255).toString(16);
   const green = random(0, 255).toString(16);
 
-  return `#${red}${green}${blue}`;
+  return graymode ? `#${red}${red}${red}` : `#${red}${green}${blue}`;
 }
 
 function displayCurrentMode() {
@@ -205,6 +205,9 @@ function colorGridItem(gridItem) {
       break;
     case 1: // rainbow mode
       gridItem.style.backgroundColor = getRandomColor();
+      break;
+    case 2: //  gray mode
+      gridItem.style.backgroundColor = getRandomColor(true);
       break;
   }
 }
