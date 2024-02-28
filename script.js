@@ -13,7 +13,6 @@ const resizeRange = document.querySelector('#resize-range');
 const resizeLabel = document.querySelector('label[for="resize-range"]');
 
 // variables //
-const gridMaxWidth = parseFloat(window.getComputedStyle(grid).width);
 let gridSize = 16;
 let gridItemColor = '#ff0000';
 let gridBordersEnable = false;
@@ -93,6 +92,7 @@ function AttachGridOnLoad() {
 }
 
 function createGridFragment(gridSize) {
+  const gridMaxWidth = parseFloat(window.getComputedStyle(grid).width);
   const gridItemSize = gridMaxWidth / gridSize;
 
   const fragment = document.createDocumentFragment();
@@ -103,12 +103,17 @@ function createGridFragment(gridSize) {
 
     newGridItem.style.width = `${gridItemSize}px`;
     newGridItem.style.height = `${gridItemSize}px`;
+    newGridItem.style.backgroundColor = '#ffffff';
+
     fragment.appendChild(newGridItem);
   }
+
   return fragment;
 }
 
 function colorGridItem(gridItem) {
+  const itemBackgroundColor = gridItem.style.backgroundColor;
+
   switch (drawingMode) {
     case 0: // color mode
     default:
@@ -119,6 +124,14 @@ function colorGridItem(gridItem) {
       break;
     case 2: //  gray mode
       gridItem.style.backgroundColor = getRandomColor(true);
+      break;
+    case 3: // darkening mode
+      let colorObj1 = rgbStringToObject(itemBackgroundColor);
+      gridItem.style.backgroundColor = darkenColor(colorObj1);
+      break;
+    case 4: // lightening mode
+      let colorObj2 = rgbStringToObject(itemBackgroundColor);
+      gridItem.style.backgroundColor = lightenColor(colorObj2);
       break;
   }
 }
@@ -192,4 +205,36 @@ function random(min, max) {
   max = Math.ceil(max);
 
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function darkenColor(rgbColorObj, darkenPercent = 10) {
+  const darkenNumber = Math.floor((255 * darkenPercent) / 100);
+
+  const red = Math.max(rgbColorObj.red - darkenNumber, 0);
+  const blue = Math.max(rgbColorObj.blue - darkenNumber, 0);
+  const green = Math.max(rgbColorObj.green - darkenNumber, 0);
+
+  return `rgb(${red},${blue},${green})`;
+}
+
+function lightenColor(rgbColorObj, lightenPercent = 10) {
+  const lightenNumber = Math.floor((255 * lightenPercent) / 100);
+
+  const red = Math.min(rgbColorObj.red + lightenNumber, 255);
+  const blue = Math.min(rgbColorObj.blue + lightenNumber, 255);
+  const green = Math.min(rgbColorObj.green + lightenNumber, 255);
+
+  return `rgb(${red},${blue},${green})`;
+}
+
+// converts "rgb(255, 255, 255)" to {255, 255, 255}
+function rgbStringToObject(rgbColorString) {
+  console.log(`"${rgbColorString}"`);
+  const colorObj = {};
+
+  colorObj.red = parseInt(rgbColorString.split(',')[0].split('(')[1]);
+  colorObj.green = parseInt(rgbColorString.split(',')[1].trim());
+  colorObj.blue = parseInt(rgbColorString.split(',')[2]);
+
+  return colorObj;
 }
