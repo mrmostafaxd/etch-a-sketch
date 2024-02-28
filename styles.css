@@ -88,6 +88,14 @@ button:active,
   outline: none;
 }
 
+.btn-active:hover {
+  background-color: #212938;
+}
+
+.btn-active:focus {
+  background-color: #1e2532;
+}
+
 .resize-container {
   margin-top: 20px;
   display: flex;
