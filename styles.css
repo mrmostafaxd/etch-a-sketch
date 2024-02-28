@@ -15,41 +15,60 @@ h1 {
   font-size: 48px;
 }
 
+.main,
+.btn-container,
+.mode-container,
+#color-input-wrapper,
+.resize-container,
+.grid-container,
+.grid {
+  display: flex;
+}
+
+.main,
+#color-input-wrapper,
+.grid-container {
+  justify-content: center;
+}
+
 .main {
   margin-top: 50px;
-  display: flex;
-  justify-content: center;
   align-items: start;
   gap: 50px;
 }
 
-.btn-container {
-  display: flex;
+.btn-container,
+.mode-container,
+.resize-container,
+#color-input-wrapper {
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
+}
+
+.btn-container,
+.mode-container {
   gap: 10px;
+}
+.btn-container {
+  justify-content: flex-start;
   padding-top: 20px;
 }
 
 .mode-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
   margin-bottom: 30px;
 }
 
+#color-input-wrapper,
+button {
+  cursor: pointer;
+}
+
 #color-input-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100px;
   height: 100px;
   background-color: red;
   border: 6px solid white;
   border-radius: 50%;
-  cursor: pointer;
 }
 
 #color-input {
@@ -59,7 +78,6 @@ h1 {
 }
 
 button {
-  cursor: pointer;
   background-color: #2d3748;
   padding: 8px 16px;
   color: white;
@@ -98,9 +116,6 @@ button:active,
 
 .resize-container {
   margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 5px;
 }
 
@@ -113,15 +128,12 @@ button:active,
 }
 
 .grid-container {
-  display: flex;
-  justify-content: center;
   border: 2px solid #2d3748;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .grid {
   background-color: white;
-  display: flex;
   flex-wrap: wrap;
   width: 500px;
   height: 500px;
