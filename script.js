@@ -1,4 +1,4 @@
-// elements
+// elements //
 const grid = document.querySelector('#grid');
 const btnContainer = document.querySelector('#btn-container');
 const modeContainer = document.querySelector('#mode-container');
@@ -12,14 +12,17 @@ const toggleBtn = document.querySelector('#toggle-btn');
 const resizeRange = document.querySelector('#resize-range');
 const resizeLabel = document.querySelector('label[for="resize-range"]');
 
-// variables
+// variables //
 const gridMaxWidth = parseFloat(window.getComputedStyle(grid).width);
 let gridSize = 16;
 let gridItemColor = '#ff0000';
 let gridBordersEnable = false;
-let drawingMode = 0; // 0: color mode, 1: rainbow mode, : gray mode
 
-//event listeners
+// 0: color mode, 1: rainbow mode, : gray mode,
+// 2: darkening mode, 3: lightening mode
+let drawingMode = 0;
+
+//event listeners //
 window.addEventListener('load', AttachGridOnLoad);
 
 grid.addEventListener('mouseover', (evt) => {
@@ -79,7 +82,7 @@ colorInput.addEventListener('change', () => {
   colorInputWrapper.style.backgroundColor = colorInput.value;
 });
 
-// functions
+// functions //
 function AttachGridOnLoad() {
   const gridFragment = createGridFragment(gridSize);
   toggleGridBorder(gridFragment.children);
@@ -140,22 +143,6 @@ function resizeGrid() {
   grid.appendChild(gridFragment);
 
   grid.style.display = 'flex';
-}
-
-function createGridFragment(gridSize) {
-  const gridItemSize = gridMaxWidth / gridSize;
-
-  const fragment = document.createDocumentFragment();
-  for (let i = 1; i <= gridSize * gridSize; i++) {
-    const newGridItem = document.createElement('div');
-
-    newGridItem.dataset.index = `${i}`;
-
-    newGridItem.style.width = `${gridItemSize}px`;
-    newGridItem.style.height = `${gridItemSize}px`;
-    fragment.appendChild(newGridItem);
-  }
-  return fragment;
 }
 
 function toggleGridBorder(gridItems) {
