@@ -67,6 +67,7 @@ resizeRange.addEventListener('input', () => {
 resizeRange.addEventListener('change', () => {
   gridSize = resizeRange.value;
   resizeGrid();
+  toggleGridBorder(grid.children);
 });
 
 colorInputWrapper.addEventListener('click', () => {
