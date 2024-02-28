@@ -18,12 +18,14 @@
     <h1>Etch-a-Sketch</h1>
     <div class="main">
       <div id="btn-container" class="btn-container">
-        <div class="mode-container">
+        <div id="mode-container" class="mode-container">
           <div id="color-input-wrapper">
             <input type="color" value="#ff0000" name="color" id="color-input" />
           </div>
-          <button id="color-mode-btn">Color mode</button>
-          <button id="rainbow-mode-btn">Rainbow mode</button>
+          <button id="color-mode-btn" class="btn-active" data-index="0">
+            Color mode
+          </button>
+          <button id="rainbow-mode-btn" data-index="1">Rainbow mode</button>
         </div>
         <button id="reset-btn">Reset grid</button>
         <button id="resize-btn">Resize grid</button>

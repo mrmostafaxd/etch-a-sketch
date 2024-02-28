@@ -1,8 +1,6 @@
 const grid = document.querySelector('#grid');
 const btnContainer = document.querySelector('#btn-container');
-
-const colorModeBtn = document.querySelector('#color-mode-btn');
-const rainbowModeBtn = document.querySelector('#rainbow-mode-btn');
+const modeContainer = document.querySelector('#mode-container');
 
 const resetBtn = document.querySelector('#reset-btn');
 const resizeBtn = document.querySelector('#resize-btn');
@@ -13,7 +11,7 @@ const colorInput = document.querySelector('#color-input');
 
 const gridMaxWidth = parseFloat(window.getComputedStyle(grid).width);
 
-let gridSize = 4;
+let gridSize = 16;
 let gridItemColor = '#ff0000';
 let gridEnable = true;
 let drawingMode = 0; // 0: color mode, 1: rainbow mode
@@ -25,7 +23,16 @@ grid.addEventListener('mouseover', (evt) => {
   //  assure that only the grid items are colored
   const itemIndex = evt.target.dataset.index;
   if (itemIndex !== undefined) {
-    evt.target.style.backgroundColor = gridItemColor;
+    colorGridItem(evt.target);
+  }
+});
+
+modeContainer.addEventListener('click', (evt) => {
+  const childDataIndex = evt.target.dataset.index;
+  if (childDataIndex !== undefined) {
+    drawingMode = +childDataIndex;
+    console.log(drawingMode);
+    displayCurrentMode();
   }
 });
 
@@ -167,6 +174,22 @@ function getRandomColor() {
   return `#${red}${green}${blue}`;
 }
 
+function displayCurrentMode() {
+  const modeContainerChildren = modeContainer.children;
+
+  for (const child of modeContainerChildren) {
+    if (child.dataset.index !== undefined) {
+      child.classList.remove('btn-active');
+    }
+  }
+
+  const activeModeBtn = modeContainer.querySelector(
+    `[data-index="${drawingMode}"]`
+  );
+
+  activeModeBtn.classList.add('btn-active');
+}
+
 function random(min, max) {
   min = Math.floor(min);
   max = Math.ceil(max);
@@ -174,4 +197,14 @@ function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-add functionalities for getting random colors
+function colorGridItem(gridItem) {
+  switch (drawingMode) {
+    case 0: // color mode
+    default:
+      gridItem.style.backgroundColor = gridItemColor;
+      break;
+    case 1: // rainbow mode
+      gridItem.style.backgroundColor = getRandomColor();
+      break;
+  }
+}
