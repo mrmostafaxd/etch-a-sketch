@@ -1,10 +1,15 @@
 const grid = document.querySelector('#grid');
 const resetBtn = document.querySelector('#reset-btn');
 const resizeBtn = document.querySelector('#resize-btn');
+const toggleBtn = document.querySelector('#toggle-btn');
+
+const colorInputWrapper = document.querySelector('#color-input-wrapper');
+const colorInput = document.querySelector('#color-input');
 
 const gridMaxWidth = parseFloat(window.getComputedStyle(grid).width);
 
 let gridSize = 4;
+let gridItemColor = '#ff0000';
 
 window.addEventListener('load', AttachGridOnLoad);
 
@@ -13,13 +18,41 @@ grid.addEventListener('mouseover', (evt) => {
   //  assure that only the grid items are colored
   const itemIndex = evt.target.dataset.index;
   if (itemIndex !== undefined) {
-    evt.target.style.backgroundColor = 'red';
+    evt.target.style.backgroundColor = gridItemColor;
   }
 });
 
 resetBtn.addEventListener('click', resetGrid);
 
 resizeBtn.addEventListener('click', resizeGrid);
+
+colorInputWrapper.addEventListener('click', () => {
+  colorInput.click();
+});
+
+colorInput.addEventListener('change', () => {
+  gridItemColor = colorInput.value;
+  colorInputWrapper.style.backgroundColor = colorInput.value;
+});
+
+toggleBtn.addEventListener('click', () => {
+  const gridItems = grid.children;
+
+  grid.style.display = 'none';
+  for (const gridItem of gridItems) {
+    gridItem.classList.toggle('grid-item');
+
+    const index = gridItem.dataset.index;
+    if (index > gridSize * gridSize - gridSize) {
+      gridItem.classList.toggle('last-row');
+    }
+
+    if (index % gridSize === 0) {
+      gridItem.classList.toggle('last-in-row');
+    }
+  }
+  grid.style.display = 'flex';
+});
 
 function resizeGrid() {
   const userGridSize = getUserInput();
@@ -48,12 +81,17 @@ function getUserInput() {
   }
 
   if (userInput === '' || isNaN(+userInput)) {
-    alert('Non-numeric input, defaulting to current grid size');
+    alert('Non-numeric input');
     return null;
   }
 
   if (+userInput <= 0) {
     alert('grid size must be at least 1');
+    return null;
+  }
+
+  if (+userInput > 100) {
+    alert('grid size limit exceeded');
     return null;
   }
 

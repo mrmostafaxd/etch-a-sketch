@@ -5,40 +5,115 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #1a202c;
   font-family: 'Roboto', sans-serif;
+  color: white;
 }
 
 h1 {
   text-align: center;
+  font-size: 48px;
+}
+
+.main {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.main > * {
+  /* border: 1px solid orange; */
 }
 
 .btn-container {
-  margin: 20px 0;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.mode-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+#color-input-wrapper {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 20px;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  border: 6px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#color-input {
+  width: 30%;
+  height: 30%;
+  visibility: hidden;
+}
+
+button {
+  cursor: pointer;
+  background-color: #2d3748;
+  padding: 8px 16px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  border: 2px solid rgb(63, 76, 100);
+  border-radius: 8px;
+  align-self: stretch;
+}
+
+button:hover {
+  background-color: #4a5568;
+  border: 2px solid #859abd;
+}
+
+button:focus {
+  background-color: #718096;
+  border: 2px double #1a202c;
+  outline: 2px solid #4092ff;
+}
+
+button:active {
+  background-color: #1a202c;
+  border: 2px solid #4a5568;
+  outline: none;
 }
 
 .grid-container {
   display: flex;
   justify-content: center;
+  border: 2px solid #2d3748;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  /* border-radius: 10px; */
 }
 
 .grid {
+  background-color: white;
   display: flex;
   flex-wrap: wrap;
-  width: 600px;
+  width: 500px;
 }
 
 .grid-item {
-  border-left: 1px solid black;
-  border-top: 1px solid black;
+  border-right: 1px solid #4e4e4e;
+  border-bottom: 1px solid #4e4e4e;
 }
 
 .last-row {
-  border-bottom: 1px solid black;
+  border-bottom: none;
 }
 
 .last-in-row {
-  border-right: 1px solid black;
+  border-right: none;
 }
