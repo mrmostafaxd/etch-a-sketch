@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+.grid-container {
+  display: flex;
+  justify-content: center;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 600px;
+}
+
+.grid-item {
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+}
+
+.last-row {
+  border-bottom: 1px solid black;
+}
+
+.last-in-row {
+  border-right: 1px solid black;
+}
