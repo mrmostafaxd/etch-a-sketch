@@ -84,7 +84,8 @@ button:focus {
   outline: 2px solid #4092ff;
 }
 
-button:active {
+button:active,
+.btn-active {
   background-color: #1a202c;
   border: 2px solid #4a5568;
   outline: none;

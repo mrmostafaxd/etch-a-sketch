@@ -10,6 +10,7 @@ const gridMaxWidth = parseFloat(window.getComputedStyle(grid).width);
 
 let gridSize = 4;
 let gridItemColor = '#ff0000';
+let gridEnable = true;
 
 window.addEventListener('load', AttachGridOnLoad);
 
@@ -36,6 +37,8 @@ colorInput.addEventListener('change', () => {
 });
 
 toggleBtn.addEventListener('click', () => {
+  toggleBtn.classList.toggle('btn-active');
+  toggleBtn.blur();
   const gridItems = grid.children;
 
   grid.style.display = 'none';
