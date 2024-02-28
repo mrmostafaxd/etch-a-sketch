@@ -33,7 +33,6 @@ modeContainer.addEventListener('click', (evt) => {
   const childDataIndex = evt.target.dataset.index;
   if (childDataIndex !== undefined) {
     drawingMode = +childDataIndex;
-    console.log(drawingMode);
     displayCurrentMode();
   }
 });
@@ -74,18 +73,7 @@ toggleBtn.addEventListener('click', () => {
   const gridItems = grid.children;
 
   grid.style.display = 'none';
-  for (const gridItem of gridItems) {
-    gridItem.classList.toggle('grid-item');
-
-    const index = gridItem.dataset.index;
-    if (index > gridSize * gridSize - gridSize) {
-      gridItem.classList.toggle('last-row');
-    }
-
-    if (index % gridSize === 0) {
-      gridItem.classList.toggle('last-in-row');
-    }
-  }
+  toggleGridBorder(gridItems);
   grid.style.display = 'flex';
 });
 
@@ -105,10 +93,27 @@ function resizeGrid() {
 
 function AttachGridOnLoad() {
   const gridFragment = createGrid(gridSize);
+  toggleGridBorder(gridFragment.children);
 
   grid.style.display = 'none';
   grid.appendChild(gridFragment);
   grid.style.display = 'flex';
+}
+
+function toggleGridBorder(gridItems) {
+  for (const gridItem of gridItems) {
+    const gridItemIndex = +gridItem.dataset.index;
+
+    gridItem.classList.toggle('grid-item', gridBordersEnable);
+
+    if (gridItemIndex > gridSize * gridSize - gridSize) {
+      gridItem.classList.toggle('last-row', gridBordersEnable);
+    }
+
+    if (gridItemIndex % gridSize === 0) {
+      gridItem.classList.toggle('last-in-row', gridBordersEnable);
+    }
+  }
 }
 
 function createGrid(gridSize) {
@@ -122,19 +127,6 @@ function createGrid(gridSize) {
 
     newGridItem.style.width = `${gridItemSize}px`;
     newGridItem.style.height = `${gridItemSize}px`;
-
-    if (gridBordersEnable) {
-      newGridItem.classList.add('grid-item');
-
-      if (i > gridSize * gridSize - gridSize) {
-        newGridItem.classList.add('last-row');
-      }
-
-      if (i % gridSize === 0) {
-        newGridItem.classList.add('last-in-row');
-      }
-    }
-
     fragment.appendChild(newGridItem);
   }
   return fragment;
