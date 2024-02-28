@@ -1,6 +1,9 @@
 const grid = document.querySelector('#grid');
-
 const btnContainer = document.querySelector('#btn-container');
+
+const colorModeBtn = document.querySelector('#color-mode-btn');
+const rainbowModeBtn = document.querySelector('#rainbow-mode-btn');
+
 const resetBtn = document.querySelector('#reset-btn');
 const resizeBtn = document.querySelector('#resize-btn');
 const toggleBtn = document.querySelector('#toggle-btn');
@@ -13,6 +16,7 @@ const gridMaxWidth = parseFloat(window.getComputedStyle(grid).width);
 let gridSize = 4;
 let gridItemColor = '#ff0000';
 let gridEnable = true;
+let drawingMode = 0; // 0: color mode, 1: rainbow mode
 
 window.addEventListener('load', AttachGridOnLoad);
 
@@ -154,3 +158,20 @@ function resetGrid() {
   }
   grid.style.display = 'flex';
 }
+
+function getRandomColor() {
+  const red = random(0, 255).toString(16);
+  const blue = random(0, 255).toString(16);
+  const green = random(0, 255).toString(16);
+
+  return `#${red}${green}${blue}`;
+}
+
+function random(min, max) {
+  min = Math.floor(min);
+  max = Math.ceil(max);
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+add functionalities for getting random colors
