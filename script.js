@@ -3,8 +3,10 @@ const btnContainer = document.querySelector('#btn-container');
 const modeContainer = document.querySelector('#mode-container');
 
 const resetBtn = document.querySelector('#reset-btn');
-const resizeBtn = document.querySelector('#resize-btn');
 const toggleBtn = document.querySelector('#toggle-btn');
+
+const resizeRange = document.querySelector('#resize-range');
+const resizeLabel = document.querySelector('label[for="resize-range"]');
 
 const colorInputWrapper = document.querySelector('#color-input-wrapper');
 const colorInput = document.querySelector('#color-input');
@@ -46,7 +48,14 @@ resetBtn.addEventListener('click', () => {
   resetGrid();
 });
 
-resizeBtn.addEventListener('click', resizeGrid);
+// resizeBtn.addEventListener('click', resizeGrid);
+resizeRange.addEventListener('input', () => {
+  resizeLabel.textContent = `${resizeRange.value} x ${resizeRange.value}`;
+});
+resizeRange.addEventListener('change', () => {
+  gridSize = resizeRange.value;
+  resizeGrid();
+});
 
 colorInputWrapper.addEventListener('click', () => {
   colorInput.click();
@@ -81,12 +90,6 @@ toggleBtn.addEventListener('click', () => {
 });
 
 function resizeGrid() {
-  const userGridSize = getUserInput();
-  if (userGridSize === null) {
-    return;
-  }
-  gridSize = userGridSize;
-
   const gridFragment = createGrid(gridSize);
 
   grid.style.display = 'none';
@@ -98,30 +101,6 @@ function resizeGrid() {
   grid.appendChild(gridFragment);
 
   grid.style.display = 'flex';
-}
-
-function getUserInput() {
-  const userInput = prompt('Enter grid size (max 100): ');
-  if (userInput === null) {
-    return null;
-  }
-
-  if (userInput === '' || isNaN(+userInput)) {
-    alert('Non-numeric input');
-    return null;
-  }
-
-  if (+userInput <= 0) {
-    alert('grid size must be at least 1');
-    return null;
-  }
-
-  if (+userInput > 100) {
-    alert('grid size limit exceeded');
-    return null;
-  }
-
-  return +userInput;
 }
 
 function AttachGridOnLoad() {

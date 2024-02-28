@@ -29,8 +29,18 @@
           <button id="gray-mode-btn" data-index="2">Gray mode</button>
         </div>
         <button id="reset-btn">Reset grid</button>
-        <button id="resize-btn">Resize grid</button>
         <button id="toggle-btn">Toggle grid</button>
+        <div id="resize-container" class="resize-container">
+          <label for="resize-range">16 x 16</label>
+          <input
+            type="range"
+            value="16"
+            min="1"
+            max="64"
+            name="resize-range"
+            id="resize-range"
+          />
+        </div>
       </div>
       <div class="grid-container">
         <div id="grid" class="grid"></div>
