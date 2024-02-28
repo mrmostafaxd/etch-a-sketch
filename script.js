@@ -2,8 +2,19 @@ const grid = document.querySelector('#grid');
 
 const gridMaxWidth = parseFloat(window.getComputedStyle(grid).width);
 
+let gridSize = 16;
+
 window.addEventListener('load', () => {
-  createGrid(100);
+  createGrid(gridSize);
+});
+
+grid.addEventListener('mouseover', (evt) => {
+  // data-index attribute is used to
+  //  assure that only the grid items are colored
+  const itemIndex = evt.target.dataset.index;
+  if (itemIndex !== undefined) {
+    evt.target.style.backgroundColor = 'red';
+  }
 });
 
 function createGrid(gridSize) {
@@ -12,6 +23,8 @@ function createGrid(gridSize) {
   const fragment = document.createDocumentFragment();
   for (let i = 1; i <= gridSize * gridSize; i++) {
     const newGridItem = document.createElement('div');
+
+    newGridItem.dataset.index = `${i}`;
 
     newGridItem.style.width = `${gridItemSize}px`;
     newGridItem.style.height = `${gridItemSize}px`;
