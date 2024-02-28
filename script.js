@@ -179,7 +179,7 @@ function resetGrid() {
   grid.style.display = 'none';
   const gridChildren = grid.children;
   for (const gridItem of gridChildren) {
-    gridItem.style.backgroundColor = '';
+    gridItem.style.backgroundColor = '#ffffff';
   }
   grid.style.display = 'flex';
 }
