@@ -13,7 +13,7 @@ const gridMaxWidth = parseFloat(window.getComputedStyle(grid).width);
 
 let gridSize = 16;
 let gridItemColor = '#ff0000';
-let gridEnable = true;
+let gridBordersEnable = false;
 let drawingMode = 0; // 0: color mode, 1: rainbow mode, : gray mode
 
 window.addEventListener('load', AttachGridOnLoad);
@@ -58,6 +58,8 @@ colorInput.addEventListener('change', () => {
 });
 
 toggleBtn.addEventListener('click', () => {
+  gridBordersEnable = !gridBordersEnable;
+
   toggleBtn.classList.toggle('btn-active');
   toggleBtn.blur();
   const gridItems = grid.children;
@@ -142,15 +144,18 @@ function createGrid(gridSize) {
     newGridItem.style.width = `${gridItemSize}px`;
     newGridItem.style.height = `${gridItemSize}px`;
 
-    newGridItem.classList.add('grid-item');
+    if (gridBordersEnable) {
+      newGridItem.classList.add('grid-item');
 
-    if (i > gridSize * gridSize - gridSize) {
-      newGridItem.classList.add('last-row');
+      if (i > gridSize * gridSize - gridSize) {
+        newGridItem.classList.add('last-row');
+      }
+
+      if (i % gridSize === 0) {
+        newGridItem.classList.add('last-in-row');
+      }
     }
 
-    if (i % gridSize === 0) {
-      newGridItem.classList.add('last-in-row');
-    }
     fragment.appendChild(newGridItem);
   }
   return fragment;
