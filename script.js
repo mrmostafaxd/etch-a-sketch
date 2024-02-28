@@ -1,4 +1,6 @@
 const grid = document.querySelector('#grid');
+
+const btnContainer = document.querySelector('#btn-container');
 const resetBtn = document.querySelector('#reset-btn');
 const resizeBtn = document.querySelector('#resize-btn');
 const toggleBtn = document.querySelector('#toggle-btn');
@@ -23,7 +25,15 @@ grid.addEventListener('mouseover', (evt) => {
   }
 });
 
-resetBtn.addEventListener('click', resetGrid);
+btnContainer.addEventListener('mouseout', (evt) => {
+  if (evt.target.tagName === 'BUTTON') {
+    evt.target.blur();
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  resetGrid();
+});
 
 resizeBtn.addEventListener('click', resizeGrid);
 
