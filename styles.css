@@ -11,6 +11,13 @@ h1 {
   text-align: center;
 }
 
+.btn-container {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
 .grid-container {
   display: flex;
   justify-content: center;

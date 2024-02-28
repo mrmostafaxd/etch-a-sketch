@@ -1,8 +1,9 @@
 const grid = document.querySelector('#grid');
+const resetBtn = document.querySelector('#reset-btn');
 
 const gridMaxWidth = parseFloat(window.getComputedStyle(grid).width);
 
-let gridSize = 16;
+let gridSize = 100;
 
 window.addEventListener('load', () => {
   createGrid(gridSize);
@@ -16,6 +17,8 @@ grid.addEventListener('mouseover', (evt) => {
     evt.target.style.backgroundColor = 'red';
   }
 });
+
+resetBtn.addEventListener('click', resetGrid);
 
 function createGrid(gridSize) {
   const gridItemSize = gridMaxWidth / gridSize;
@@ -41,4 +44,14 @@ function createGrid(gridSize) {
     fragment.appendChild(newGridItem);
   }
   grid.append(fragment);
+}
+
+function resetGrid() {
+  // prevent excessive reflows and repaints
+  grid.style.display = 'none';
+  const gridChildren = grid.children;
+  for (const gridItem of gridChildren) {
+    gridItem.style.backgroundColor = '';
+  }
+  grid.style.display = 'flex';
 }
