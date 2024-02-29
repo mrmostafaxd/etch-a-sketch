@@ -211,20 +211,20 @@ function darkenColor(rgbColorObj, darkenPercent = 10) {
   const darkenNumber = Math.floor((255 * darkenPercent) / 100);
 
   const red = Math.max(rgbColorObj.red - darkenNumber, 0);
-  const blue = Math.max(rgbColorObj.blue - darkenNumber, 0);
   const green = Math.max(rgbColorObj.green - darkenNumber, 0);
+  const blue = Math.max(rgbColorObj.blue - darkenNumber, 0);
 
-  return `rgb(${red},${blue},${green})`;
+  return `rgb(${red},${green},${blue})`;
 }
 
 function lightenColor(rgbColorObj, lightenPercent = 10) {
   const lightenNumber = Math.floor((255 * lightenPercent) / 100);
 
   const red = Math.min(rgbColorObj.red + lightenNumber, 255);
-  const blue = Math.min(rgbColorObj.blue + lightenNumber, 255);
   const green = Math.min(rgbColorObj.green + lightenNumber, 255);
+  const blue = Math.min(rgbColorObj.blue + lightenNumber, 255);
 
-  return `rgb(${red},${blue},${green})`;
+  return `rgb(${red},${green},${blue})`;
 }
 
 // converts "rgb(255, 255, 255)" to {255, 255, 255}
