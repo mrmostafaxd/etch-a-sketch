@@ -229,6 +229,8 @@ function lightenColor(rgbColorObj, lightenPercent = 10) {
 
 // converts "rgb(255, 255, 255)" to {255, 255, 255}
 function rgbStringToObject(rgbColorString) {
+  const colorObj = {};
+
   colorObj.red = parseInt(rgbColorString.split(',')[0].split('(')[1]);
   colorObj.green = parseInt(rgbColorString.split(',')[1].trim());
   colorObj.blue = parseInt(rgbColorString.split(',')[2]);
